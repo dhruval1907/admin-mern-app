@@ -7,6 +7,8 @@ const App = () => {
   function fetchData() {
     axios.get("http://localhost:3000/api/notes")
       .then((res) => {
+        console.log(res.data.notes);
+        
         setproduct(res.data.notes);
       })
   }
@@ -31,10 +33,18 @@ const App = () => {
           <label htmlFor="" className='text-2xl'>Price : </label>
           <input type="text" className='border-2 border-white ' style={{ padding: "0.5rem 3rem" }} />
         </div>
-        <button className='h-15 w-50 bg-teal-700 text-white/50 '>add item</button>
+        <button className='h-15 w-50 bg-teal-700 text-white/50 text-2xl rounded-2xl :active'>add item</button>
       </form>
-      <div className='h-[78%] w-full' style={{ padding: "2rem" }}>
-        <div className='notes flex flex-wrap'></div>
+      <div className='h-[68%] w-full overflow-y-auto' style={{ padding: "2rem" }}>
+        <div className='notes flex flex-wrap h-full'>
+          {product.map((elem, indx) => {
+            return <div className='h-100 w-80 bg-zinc-500/40 rounded-2xl ' style={{marginRight:"50px"}} key={indx}>
+              <div className='h-full w-full flex flex-col items-center gap-10 text-white'>
+                <img src={elem.im} alt="" />
+              </div>
+            </div>
+          })}
+        </div>
       </div>
     </div>
   )
