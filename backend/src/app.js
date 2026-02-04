@@ -20,10 +20,25 @@ app.get("/api/notes", async (req, res) => {
     const notes = await noteModel.find({})
 
     res.status(201).json({
-        message : "fethcing the data",
+        message: "fethcing the data",
         notes
     })
 })
-// delete api for deletinf product
-
+// delete api for deleting product
+app.delete("/api/notes/:indx", async (req, res) => {
+    const id = req.params.indx
+    await noteModel.findByIdAndDelete(id)
+    res.status(200).json({
+        message: "product delted successfully"
+    })
+})
+// updating the products with patch
+app.patch("/api/notes/:indx", async (req, res) => {
+    const id = req.params.indx
+    const {amount, price} = req.body
+    await noteModel.findByIdAndUpdate(id,{amount,price})
+    res.status(200).json({
+        message : "product updated"
+    })
+})
 module.exports = app
