@@ -9,9 +9,9 @@ app.use(cors())
 
 // post api
 app.post("/api/notes", async (req, res) => {
-    const { product, productimg, amount, price } = req.body
+    const { product, image, amount, price } = req.body
     const note = await noteModel.create({
-        product, productimg, amount, price
+        product, image, amount, price
     })
     res.status(201).json({
         message: "creating the products",
